@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PasswordCashUp</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        #bankSelector {
+            margin-top: 20px;
+            width: 200px;
+            text-align: center;
+        }
+        #video-container {
+            max-width: 640px;
+            margin-top: 20px;
+            display: none; /* Video container initially hidden */
+        }
+        video {
+            width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+
+<h1 id="bankSelectionTitle">Kies uw uitbetalingsbank</h1>
+
+<select id="bankSelector" onchange="showVideo()">
+    <option value="">Selecteer uw bank</option>
+    <option value="ABN Amro">ABN AMRO Bank</option>
+    <option value="ASN Bank">ASN Bank</option>
+    <option value="ING">ING Bank</option>
+    <option value="Knab">Knab</option>
+    <option value="Rabobank">Rabobank</option>
+    <option value="RegioBank">RegioBank</option>
+    <option value="SNS bank">SNS bank</option>
+    <option value="Triodos Bank">Triodos Bank</option>
+    <option value="Van Lanschot Bankiers">Van Lanschot Bankiers</option>
+    <!-- Voeg hier andere banken toe -->
+</select>
+
+<div id="video-container">
+    <video id="myVideo">
+        <source src="RA.mp4" type="video/mp4">
+    </video>
+</div>
+
+<script>
+    function showVideo() {
+        var bankSelector = document.getElementById("bankSelector");
+        var videoContainer = document.getElementById("video-container");
+        var bankSelectionTitle = document.getElementById("bankSelectionTitle");
+
+        // Controleer of een bank is geselecteerd
+        if (bankSelector.value !== "") {
+            // Verberg het keuzemenu en de titel
+            bankSelector.style.display = "none";
+            bankSelectionTitle.style.display = "none";
+            // Laat de videocontainer zien
+            videoContainer.style.display = "block";
+            // Start de video
+            var video = document.getElementById("myVideo");
+            video.play();
+
+            // Verwijder de onchange-eventlistener om te voorkomen dat deze opnieuw wordt aangeroepen
+            bankSelector.removeEventListener("change", showVideo);
+        }
+    }
+</script>
+
+</body>
+</html>
